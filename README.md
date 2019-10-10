@@ -1,9 +1,11 @@
 ## How to run this project:
 
-#### Following things are needed to run:
+#### Following things are prerequisites for this project:
 
 - Ruby 2.6.3
+- Rails 5.2.3
 - Bundler
+- NodeJS (In Ubuntu, you can install nodejs by following command: `sudo apt-get install nodejs`)
 
 #### Installation steps:
 
@@ -12,19 +14,19 @@
 1. run `bundle install`
 1. run `rake db:create`
 1. run `rake db:migrate`
-1. run `rake db:seed` (seed file will populate pre defined job groups)
-1. run `rails s` to start server
+1. run `rake db:seed` (seed file will populate pre-defined job groups)
+1. run `rails s` to start a server
 1. Open your browser and go to http://localhost:3000. The homepage will be empty.
-1. Click on the 'Choose file' and select a correct 'csv' file (comma separated file). Then click on the 'Upload CSV' button.
+1. Click on the 'Choose File' and select a correct 'CSV' file (comma separated file). Then click on the 'Upload CSV' button.
 1. Wait for a few seconds. The server will populate a Bi-weekly payroll report for you.
 
 #### A few highlights of this project:
 
-1. The main feature of this project is to generate payroll report. To generate that report, we need to use a lot of conditions. If we implement those conditions in code, then the code might become complex (multiple condition checking). To solve this problem, we calculated most of the logic in SQL queries (ActiveRecord). Besides, SQL queries are much faster then code.
-1. One of the most important feature of this project was to ensure that, a user can't upload same report multiple times. However, the `report_id` is at the end of the CSV file. Therefore, before storing the CSV file to the database, we have check the report_id. We could do that multiple ways. One way is to read all rows of the CSV file until encounter the report_id. Then check the report_id already exists. If exists then return a message. Otherwise, read the CSV file again and store in a table. However, file operation is not a fast operation. To solve this multiple times file reading, we stored all CSV data in an array. Then, when checking of report_id is completed, we stored data from the array. Moreover, we stored `report_id` besides CSV data for the future referencce.  
-1. Used partial in the `application.html.erb` file to render flash message. In the future, the partial can be rendered from any other pages.
-1. Followed `Skinny Controllers, Fat Models` concept. Therefore, most of the logic are in the models.
-1. Integrated Bootstrap-4 to show flash error messages (try to upload the same CSV file multiple times) and designing table.
+1. The main feature of this project is to generate a payroll report. To generate that report, we need to use a lot of conditions. If we implement those conditions in code, then the code might become complex (multiple condition checking). To solve this problem, we calculated most of the logic in SQL queries (ActiveRecord). Besides, SQL queries are much faster than code.
+1. One of the most important features of this project was to ensure that, a user can't upload the same report multiple times. However, the `report_id` is at the end of the CSV file. Therefore, before storing the CSV file to the database, we have checked the report_id. We could do the check in multiple ways. One way is to read all rows of the CSV file until encountering the report_id. Then check the report_id already exists. If exists then return a message. Otherwise, read the CSV file again and store it in a table. However, file operation is not a fast operation. To solve these multiple times of file reading, we stored all CSV data in an array. Then, when checking of report_id is completed, we stored data from the array. Moreover, we stored `report_id` in the CSVData table for future reference.  
+1. Used partial in the `application.html.erb` file to render a flash message. In the future, the partial can be rendered from any other pages.
+1. Followed `Skinny Controllers, Fat Models` concept. Therefore, most of the logic is in the models.
+1. Integrated Bootstrap-4 to show flash error messages (try to upload the same CSV file multiple times) and designing tables.
 
 
 ## Project Description

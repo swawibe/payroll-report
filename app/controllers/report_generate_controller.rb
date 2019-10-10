@@ -11,8 +11,8 @@ class ReportGenerateController < ApplicationController
     uploaded_file = params[:file]
 
     # We could use Paperclip to check if the file is really CSV
-    # However, for this small project we are just checking if the file is in correct format and not blank
-    if uploaded_file.blank? || File.read(uploaded_file.path, encoding: 'utf-8').valid_encoding?
+    # However, for this small project we are just checking if the file with correct extension and not blank
+    if uploaded_file.blank? || (File.extname(uploaded_file.path).upcase != '.CSV')
       flash[:error] = 'Could not find your CSV file'
       redirect_to report_generate_index_path and return
     end
@@ -26,7 +26,7 @@ class ReportGenerateController < ApplicationController
 
     # If CSV file is stored successfully, then generate report
     PayrollReport.generate_report
-    redirect_to report_generate_index_path and return
+    redirect_to report_generate_index_path
 
   end
 end

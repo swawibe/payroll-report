@@ -1,0 +1,11 @@
+<% flash.each do |type, message| %>
+    <div class="alert alert-warning" role="alert">
+      <% if message.kind_of?(Array)%>
+            <% message.each do |message_text| %>
+              <P><%= message_text %></P>
+            <% end %>
+      <% else %>
+          <%= message %>
+       <% end %>
+    </div>
+<% end %>

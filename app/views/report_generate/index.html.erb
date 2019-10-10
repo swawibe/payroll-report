@@ -1,0 +1,67 @@
+<div class="container">
+  <h1>WaveApp Payroll Report System</h1>
+
+  <div class="modal-body row">
+    <div class="row">
+      <div class="col-md-9">
+
+        <h4>Generated Bi-weekly Report</h4>
+
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <tr>
+              <td align="center"><b>Employee ID</b></td>
+              <td align="center"><b>Pay Period</b></td>
+              <td align="center"><b>Amount Paid</b></td>
+            </tr>
+            <% @reports.each do |c| %>
+                <tr>
+                  <td><%= c.employee_id %></td>
+                  <td><%= c.pay_period %></td>
+                  <td><%= number_to_currency(c.amount_paid) %></td>
+                </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="upload-csv">
+          <h4>Please upload your CSV file</h4>
+          <%= form_tag({action: :upload_csv}, multipart: true) do %>
+              <%= file_field_tag :file %>
+              <%= submit_tag('Upload CSV') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h4>Data from CSV files</h4>
+
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <tr>
+              <td align="center"><b>Date </b></td>
+              <td align="center"><b>Hours Worked </b></td>
+              <td align="center"><b>Job group</b></td>
+              <td align="center"><b>Employee ID </b></td>
+              <td align="center"><b>Report Id</b></td>
+            </tr>
+            <% @csv_data.each do |c| %>
+                <tr>
+                  <td><%= c.date %></td>
+                  <td><%= c.hours_worked %></td>
+                  <td><%= c.job_group %></td>
+                  <td><%= c.employee_id %></td>
+                  <td><%= c.report_id %></td>
+                </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
